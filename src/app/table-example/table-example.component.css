@@ -1,16 +1,23 @@
-.conGrid {
-    display: grid;
-    grid-template-rows: 200px;
-    grid-template-columns: 200px auto 200px;
-  }
-  .conGrid .left {
-    
-  }
-  .conGrid .right {
-    
-  }
-  
+.container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+}
 
+.left{
+  width: 50px;
+  height: 100%;
+}
+
+.center{
+  height: 100%;
+}
+
+.right{
+    width:50px;
+    height: 100%;
+}
 
 table {
     display: block;
@@ -21,6 +28,7 @@ table {
     white-space: nowrap;
     border-collapse: collapse;
     width: 700px;
+    /* max-width: 1024px; */
     height: 100%;
     overflow-y: auto;
     overflow-x: auto;

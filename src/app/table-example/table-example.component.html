@@ -1,31 +1,37 @@
 <!-- <div class="content" role="main"  [style.overflow]="'auto'" [style.height.px]="'500'" [style.width.px]="'100'"> -->
 <div class="content" role="main" >
-    <div class="card-container conGrid" style="height: 500px;">
-        <button class="left" mat-button (click)="onClickLeft()">←</button>
-        <table class="middle" #tableId id="table1" (scroll)="onScroll($event)">
-            <thead>
-            <tr>
-                <th *ngFor="let head of tableData.header" scope="col">{{head}} </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr mdbTableCol *ngFor="let onerow of tableData.rows">
-                <td *ngFor="let element of onerow" scope="col">{{element}} </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="card-container" style="height: 500px;">
+        <div class="container">
+            <div class="left"><button class="left" mat-button (click)="onClickLeft()">←</button></div>
+            <div class="center">
+                <table class="center" #tableId id="table1" (scroll)="onScroll($event)">
+                    <thead>
+                    <tr>
+                        <th *ngFor="let head of tableData.header" scope="col">{{head}} </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr mdbTableCol *ngFor="let onerow of tableData.rows">
+                        <td *ngFor="let element of onerow" scope="col">{{element}} </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="right"><button class="right" mat-button (click)="onClickRight()">→</button></div>
+        </div>
+        <div class="container"></div>
+        <div>
+            <p>Display columns from {{start}} to {{end}} </p> 
+            <p>The table has {{numberOfColumns}} columns </p> 
+            <p>You are at {{(end/numberOfColumns)*100}}% </p> 
+        </div>
+        </div>
         
-        <button class="right" mat-button (click)="onClickRight()">→</button>
-    </div>
         
-    <div>
-        <p>Display columns from {{start}} to {{end}} </p> 
-        <p>The table has {{numberOfColumns}} columns </p> 
-        <p>You are at {{(end/numberOfColumns)*100}}% </p> 
-    </div>
     <!-- Footer -->
     <footer>
-       
+
     </footer>
   
     <!-- <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
