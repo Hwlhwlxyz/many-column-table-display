@@ -1,10 +1,12 @@
+import { VirtualScrollTableComponent } from './virtual-scroll-table/virtual-scroll-table.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TableExampleComponent } from './table-example/table-example.component';
 
 const routes: Routes = [
-  { path: '', component: TableExampleComponent },
-  { path: 'table', component: TableExampleComponent }
+  { path: '', component: VirtualScrollTableComponent },
+  { path: 'table', component: TableExampleComponent },
+  { path: 'scroll-table', component: VirtualScrollTableComponent }
 ];
 
 @NgModule({

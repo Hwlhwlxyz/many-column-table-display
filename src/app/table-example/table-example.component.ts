@@ -44,29 +44,34 @@ export class TableExampleComponent implements OnInit {
     // if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight) {
     //   console.log("Height End");
     // }
-    if (event.target.offsetWidth + event.target.scrollLeft >= event.target.scrollWidth-this.scrollbarThreshold) {
-      this.moveToRight();
+    console.log(event.target.offsetWidth + event.target.scrollLeft , event.target.scrollWidth-this.scrollbarThreshold )
+    if (event.target.offsetWidth + event.target.scrollLeft >= event.target.scrollWidth-this.scrollbarThreshold && this.end+this.stepSize<=this.dataService.getColumnNumber()) {
+      setTimeout(()=>{this.moveToRight()}, 500);
+      console.log("right end", event.target.offsetWidth + event.target.scrollLeft, event.target.scrollWidth-this.scrollbarThreshold)
+      
     }
-    if (event.target.scrollLeft<=0){
+    if (event.target.scrollLeft<=0+this.scrollbarThreshold){
       this.moveToLeft();
     }
     console.log(event.target.offsetWidth , event.target.scrollLeft , event.target.scrollWidth)
-    
+
     // detect isScrolling or not, add columns if scrolling is stopped
     clearTimeout(this.isScrolling)
-    this.isScrolling = setTimeout(function() {
+    this.isScrolling = setTimeout(()=>{
       console.log("stop scrolling");
-      if (event.target.offsetWidth + event.target.scrollLeft >= event.target.scrollWidth-this.scrollbarThreshold) {
-        this.moveToRight();
-      }
-      if (event.target.scrollLeft<=0+this.scrollbarThreshold){
-        this.moveToLeft();
-      }
+      // if (event.target.offsetWidth + event.target.scrollLeft >= event.target.scrollWidth-this.scrollbarThreshold) {
+      //   this.moveToRight();
+      // }
+      // if (event.target.scrollLeft<=0+this.scrollbarThreshold){
+      //   this.moveToLeft();
+      // }
     }, 1000);
   }
 
+
   moveToRight() {
-    this.end = Math.min(this.end+this.stepSize, this.dataService.getColumnNumber());
+    // this.end = Math.min(this.end+this.stepSize, this.dataService.getColumnNumber());
+    this.end = this.end+this.stepSize;
     this.updateData(this.start, this.end)
     this.start = Math.max(this.start, this.end-this.displayColumnNumber);
     console.log("right")

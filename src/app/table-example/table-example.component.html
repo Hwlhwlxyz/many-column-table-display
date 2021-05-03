@@ -4,7 +4,11 @@
         <div class="container">
             <div class="left"><button class="left" mat-button (click)="onClickLeft()">←</button></div>
             <div class="center">
-                <table class="center" #tableId id="table1" (scroll)="onScroll($event)">
+                <table class="center" #tableId id="table1" 
+                (scroll)="onScroll($event)"
+                (keydown.arrowleft)="moveToLeft()"
+                (keydown.arrowright)="moveToRight()"
+                >
                     <thead>
                     <tr>
                         <th *ngFor="let head of tableData.header" scope="col">{{head}} </th>

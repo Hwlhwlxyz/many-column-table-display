@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableExampleComponent } from './table-example/table-example.component';
+import { VirtualScrollTableComponent } from './virtual-scroll-table/virtual-scroll-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TableExampleComponent
+    TableExampleComponent,
+    VirtualScrollTableComponent
   ],
   imports: [
     BrowserModule,
