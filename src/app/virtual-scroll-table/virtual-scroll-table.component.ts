@@ -65,18 +65,18 @@ export class VirtualScrollTableComponent implements OnInit {
     }
 
     // scroll to left
-    if (event.target.scrollLeft <= 0 && this.start > 0) {
+    if (event.target.scrollLeft <= this.scrollbarThreshold && this.start > 0) {
       clearTimeout(this.isScrolling)
       this.isScrolling = setTimeout(() => {
         console.log("stop scrolling");
         if (event.target.scrollLeft <= this.scrollbarThreshold && this.start > 0) {
+          this.removeRight(Math.min(this.stepSize, this.start));
           this.addToLeft(Math.min(this.stepSize, this.start));
           setTimeout(() => {
-            this.removeRight(Math.min(this.stepSize, this.start));
             if (this.start > 8){
               // prevent the situation that the scrollbar jump to the end of right bound
               this.tableEle.nativeElement.scrollLeft = Math.min(this.tableEle.nativeElement.scrollLeft+this.getTotalWidthFromLeft(this.stepSize), 
-              this.tableEle.nativeElement.scrollWidth-this.scrollbarThreshold-10);
+              (this.tableEle.nativeElement.scrollWidth-this.scrollbarThreshold-10)/2);
             }
           }, 100);
         }
