@@ -39,26 +39,21 @@ export class VirtualScrollTableComponent implements OnInit {
   // @HostListener('window:scroll', ['$event']) // for window scroll events
   @HostListener('scroll', ['$event']) // for scroll events of the current element
   onScroll(event) {
-    console.log(event)
-    // if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight) {
-    //   console.log("Height End");
-    // }
     console.log(event.target.offsetWidth + event.target.scrollLeft, event.target.scrollWidth)
     console.log(event.target.clientWidth + event.target.scrollLeft, event.target.scrollWidth)
 
     // scroll to right
     if (event.target.offsetWidth + event.target.scrollLeft >= event.target.scrollWidth - this.scrollbarThreshold && this.end <= this.dataService.getColumnNumber()) {
-      // this.removeLeft(this.stepSize);
-      // this.addToRight(this.stepSize);
       // detect isScrolling or not, add columns if scrolling is stopped, length of scrollbar need some time to update 
       // after updating the content, the scroll bar is still to the end, so we need to remove data first and then add data
+      const numOfColumnsToMove = Math.min(this.dataService.getColumnNumber()-this.end, this.stepSize);
       clearTimeout(this.isScrolling)
       this.isScrolling = setTimeout(() => {
         console.log("stop scrolling");
         if (event.target.offsetWidth + event.target.scrollLeft >= event.target.scrollWidth - this.scrollbarThreshold && this.end < this.dataService.getColumnNumber()) {
-          this.removeLeft(Math.round(this.stepSize))
+          this.removeLeft(numOfColumnsToMove)
           setTimeout(() => {
-            this.addToRight(Math.round(this.stepSize));
+            this.addToRight(numOfColumnsToMove);
           }, 50);
         }
       }, 50);
@@ -66,17 +61,19 @@ export class VirtualScrollTableComponent implements OnInit {
 
     // scroll to left
     if (event.target.scrollLeft <= this.scrollbarThreshold && this.start > 0) {
+      const numOfColumnsToMoveAddToLeft = Math.min(this.start, this.stepSize);
+      const numOfColumnsToMoveRemoveRight = this.end-Math.max(0, (this.start-numOfColumnsToMoveAddToLeft+this.displayColumnNumber));
       clearTimeout(this.isScrolling)
       this.isScrolling = setTimeout(() => {
         console.log("stop scrolling");
         if (event.target.scrollLeft <= this.scrollbarThreshold && this.start > 0) {
-          this.removeRight(Math.min(this.stepSize, this.start));
-          this.addToLeft(Math.min(this.stepSize, this.start));
+          this.removeRight(numOfColumnsToMoveRemoveRight);
+          this.addToLeft(numOfColumnsToMoveAddToLeft);
           setTimeout(() => {
-            if (this.start > 8){
+            if (this.start > 1){
               // prevent the situation that the scrollbar jump to the end of right bound
               this.tableEle.nativeElement.scrollLeft = Math.min(this.tableEle.nativeElement.scrollLeft+this.getTotalWidthFromLeft(this.stepSize), 
-              (this.tableEle.nativeElement.scrollWidth-this.scrollbarThreshold-10)/2);
+              (this.tableEle.nativeElement.scrollWidth-this.scrollbarThreshold)/2);
             }
           }, 100);
         }
