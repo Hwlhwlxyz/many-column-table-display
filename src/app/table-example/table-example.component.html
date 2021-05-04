@@ -1,6 +1,6 @@
 <!-- <div class="content" role="main"  [style.overflow]="'auto'" [style.height.px]="'500'" [style.width.px]="'100'"> -->
 <div class="content" role="main" >
-    <div class="card-container" style="height: 500px;">
+    <div class="card-container containergrid" style="height: 500px;">
         <div class="container">
             <div class="left"><button class="left" mat-button (click)="onClickLeft()">←</button></div>
             <div class="center">
@@ -24,7 +24,7 @@
             
             <div class="right"><button class="right" mat-button (click)="onClickRight()">→</button></div>
         </div>
-        <div class="container"></div>
+
         <div>
             <p>Display columns from {{start}} to {{end}} </p> 
             <p>The table has {{numberOfColumns}} columns </p> 

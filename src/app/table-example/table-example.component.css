@@ -1,8 +1,16 @@
+.containergrid {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: 20px;
+}
+
 .container{
   display:flex;
   justify-content: center;
   align-items: center;
   height: 600px;
+  position: relative;
+    top: 10px;
 }
 
 .left{
@@ -31,7 +39,7 @@ table {
     /* max-width: 1024px; */
     height: 100%;
     overflow-y: auto;
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 th, td {
     border: 1px solid #999;
