@@ -70,16 +70,16 @@ export class TableExampleComponent implements OnInit {
 
 
   moveToRight() {
-    // this.end = Math.min(this.end+this.stepSize, this.dataService.getColumnNumber());
-    this.end = this.end+this.stepSize;
-    this.updateData(this.start, this.end)
+    this.end = Math.min(this.end+this.stepSize, this.dataService.getColumnNumber());
     this.start = Math.max(this.start, this.end-this.displayColumnNumber);
+    this.updateData(this.start, this.end)
+    
     console.log("right")
   }
 
   moveToLeft() {
     this.start = Math.max(0, this.start-this.stepSize);
-    this.end = Math.min(this.start+this.displayColumnNumber, this.end);
+    this.end = Math.min(Math.max(this.start+this.displayColumnNumber, this.displayColumnNumber), this.end);
     this.updateData(this.start, this.end)
   }
 
